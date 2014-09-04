@@ -7,12 +7,15 @@ Speed::Speed() {
   pointwheel = 0;
   pointcranckset = 0;
   wheelcircu = 1620;
-
+  tripCount = 0;
+  totalCount = 0;
 }
 
 void Speed::triggerWheel() {
   timewheel[pointwheel] = millis();
   pointwheel = (pointwheel + 1) % SPEED_WHEELDETECTOR_CACHESIZE;
+  tripCount++;
+  totalCount++;
 }
 void Speed::triggerCranckset() {
 
@@ -52,7 +55,7 @@ int Speed::getWheelRpm() {
 float Speed::getSpeedKph() {
   Serial.println("-------------------");
   float r = wheelcircu * SPEED_KPH;
-  float speedKph = r * getWheelRpm()/1000;
+  float speedKph = r * getWheelRpm() / 1000;
   Serial.println(r);
   Serial.println(speedKph);
   Serial.println("-------------------");
@@ -60,10 +63,10 @@ float Speed::getSpeedKph() {
 
 
 }
-
-
-int Speed::getSpeed() {
-  return 30;
-
+long Speed::getTripDistance() {
+ 
+  return  (long) wheelcircu * tripCount / 1000;
 
 }
+
+

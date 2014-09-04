@@ -4,7 +4,8 @@
 
 class Speed {
   private:
-  int 
+    long tripCount,totalCount;
+       
     long timewheel[SPEED_WHEELDETECTOR_CACHESIZE];
     long timecranckset[SPEED_CRANCKSETDETECTOR_CACHESIZE];
     int pointwheel, pointcranckset;
@@ -21,8 +22,7 @@ int wheelcircu;
     int getCrancksetRpm();
     int getWheelRpm();
     float getSpeedKph();
-    static int getSpeed();
-
+    long getTripDistance();
 
 };
 

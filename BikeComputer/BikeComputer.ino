@@ -456,16 +456,50 @@ void displayInfo() {
     lcd.setCursor(62, 0);
     lcd.printInt(ss, 1);
     //peddle
-    lcd.setCursor(0, 4);
+    lcd.setCursor(0, 3);
     lcd.setFontSize(FONT_SIZE_SMALL);
     lcd.print("P D");
-    lcd.setCursor(0, 6);
+    lcd.setCursor(0, 5);
     lcd.setFontSize(FONT_SIZE_SMALL);
     lcd.print("PPM");
-    lcd.setCursor(30, 4);
+    lcd.setCursor(30, 3);
     lcd.setFontSize(FONT_SIZE_XLARGE);
     lcd.printInt(spd.getCrancksetRpm(), 3);
+    //distanc
+    lcd.setCursor(0, 6);
+    lcd.setFontSize(FONT_SIZE_SMALL);
+    lcd.print("DST");
+
+    long td = spd.getTripDistance();
+    lcd.setCursor(30, 6);
+    lcd.setFontSize(FONT_SIZE_SMALL);
+    if (td < 1000) {
+      lcd.printLong(td, 5);
+      lcd.print(" M");
+
+
+    } else {
+      td = td/1000;
+      if(td<10){
+      lcd.print("   ");
+      }else if(td<100){
+      lcd.print("  ");
+      }else if(td<1000){
+      lcd.print(" ");
+      }
+      lcd.print(td, 1);
+      lcd.print(" KM");
+
+
+    }
+
+
+
+
+    //refresh reset
     speedrefresh = 0;
+
+
   }
   //gear
   lcd.setCursor(96, 0);
